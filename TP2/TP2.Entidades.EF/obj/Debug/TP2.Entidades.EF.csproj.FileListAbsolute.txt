@@ -8,3 +8,13 @@ C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Entidades.EF\bin\Debug\Entity
 C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Entidades.EF\obj\Debug\TP2.Entidades.EF.csprojResolveAssemblyReference.cache
 C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Entidades.EF\obj\Debug\TP2.Entidades.EF.dll
 C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Entidades.EF\obj\Debug\TP2.Entidades.EF.pdb
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\bin\Debug\TP2.Entidades.EF.dll.config
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\bin\Debug\TP2.Entidades.EF.dll
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\bin\Debug\TP2.Entidades.EF.pdb
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\bin\Debug\EntityFramework.dll
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\bin\Debug\EntityFramework.xml
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\obj\Debug\TP2.Entidades.EF.csprojResolveAssemblyReference.cache
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\obj\Debug\TP2.Entidades.EF.dll
+C:\Users\yzeballos.YOZEBALLOS\Documents\GitHub\UPC-TP2\TP2\TP2.Entidades.EF\obj\Debug\TP2.Entidades.EF.pdb

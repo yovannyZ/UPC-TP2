@@ -2034,6 +2034,8 @@
     <Content Include="Views\Shared\_Paciente.cshtml" />
     <Content Include="Style\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Views\PacienteEstado\Index.cshtml" />
+    <Content Include="Views\PacienteEstado\Aprobar.cshtml" />
+    <Content Include="Views\PacienteEstado\Desaprobar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

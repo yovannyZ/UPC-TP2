@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="TP2Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -62,6 +65,9 @@
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GDA_HISTORIA_CLINICA.cs">
+      <DependentUpon>TP2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_GDA_INGRESOUCI.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="T_GDA_PACIENTE.cs">

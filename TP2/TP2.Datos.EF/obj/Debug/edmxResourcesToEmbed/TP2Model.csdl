@@ -123,6 +123,12 @@
       <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
       <End Role="T_GUQ_PACIENTE_ESTADO_UCI" EntitySet="T_GUQ_PACIENTE_ESTADO_UCI" />
     </AssociationSet>
+    <EntitySet Name="T_GDA_INGRESOUCI" EntityType="TP2Model.T_GDA_INGRESOUCI" />
+    <AssociationSet Name="FK__T_GDA_ING__idPac__6EF57B66" Association="TP2Model.FK__T_GDA_ING__idPac__6EF57B66">
+      <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
+      <End Role="T_GDA_INGRESOUCI" EntitySet="T_GDA_INGRESOUCI" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="TP2Model.sysdiagrams" />
   </EntityContainer>
   <EntityType Name="T_GCT_PROGRAMACION_MEDICA">
     <Key>
@@ -179,6 +185,7 @@
     <NavigationProperty Name="T_GDA_HISTORIA_CLINICA" Relationship="TP2Model.FK_T_GDA_HISTORIA_CLINICA4" FromRole="T_GDA_PACIENTE" ToRole="T_GDA_HISTORIA_CLINICA" />
     <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN2" FromRole="T_GDA_PACIENTE" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
     <NavigationProperty Name="T_GUQ_PACIENTE_ESTADO_UCI" Relationship="TP2Model.fk_paciente" FromRole="T_GDA_PACIENTE" ToRole="T_GUQ_PACIENTE_ESTADO_UCI" />
+    <NavigationProperty Name="T_GDA_INGRESOUCI" Relationship="TP2Model.FK__T_GDA_ING__idPac__6EF57B66" FromRole="T_GDA_PACIENTE" ToRole="T_GDA_INGRESOUCI" />
   </EntityType>
   <EntityType Name="T_GG_EMPLEADO">
     <Key>
@@ -666,4 +673,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="T_GDA_INGRESOUCI">
+    <Key>
+      <PropertyRef Name="idIngreso" />
+    </Key>
+    <Property Name="idIngreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="estPaciente" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="medSolicitante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gravedad" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="motDesaprobacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="obsDesaprobacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idPaciente" Type="Int32" />
+    <NavigationProperty Name="T_GDA_PACIENTE" Relationship="TP2Model.FK__T_GDA_ING__idPac__6EF57B66" FromRole="T_GDA_INGRESOUCI" ToRole="T_GDA_PACIENTE" />
+  </EntityType>
+  <Association Name="FK__T_GDA_ING__idPac__6EF57B66">
+    <End Type="TP2Model.T_GDA_PACIENTE" Role="T_GDA_PACIENTE" Multiplicity="0..1" />
+    <End Type="TP2Model.T_GDA_INGRESOUCI" Role="T_GDA_INGRESOUCI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_GDA_PACIENTE">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="T_GDA_INGRESOUCI">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

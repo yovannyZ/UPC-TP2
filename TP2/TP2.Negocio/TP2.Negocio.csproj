@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bitacora.cs" />
+    <Compile Include="TGDAIngresoUCI.cs" />
     <Compile Include="TGDAPaciente.cs" />
     <Compile Include="TGGBien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,106 @@
+﻿@model TP2.Entidades.EF.T_GDA_INGRESOUCI
+
+@{
+    ViewBag.Title = "Aprobar";
+}
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+
+        $("#btnAprobar").click(function () {
+            var idIngreso = $("#idIngreso").val();
+            var estPaciente = "Aprobado";
+            var medSolicitante = $('#medSolicitante').val();
+            var gravedad = $('#gravedad').val();
+            var motDesaprobacion = $('#motDesaprobacion').val();
+            var obsDesaprobacion = $('#obsDesaprobacion').val();
+            var idPaciente = $('#idPaciente').val();
+
+            $.ajax({
+                url: "/PacienteEstado/Aprobar",
+                type: 'POST',
+                data: {
+                    idIngreso: idIngreso, estPaciente: estPaciente, medSolicitante: medSolicitante, gravedad: gravedad, motDesaprobacion: motDesaprobacion, obsDesaprobacion: obsDesaprobacion, idPaciente: idPaciente
+                },
+                success: function (data) {
+                    alert(data);
+                    if (data.indexOf("Error") == -1) {
+                        window.location.href = '/PacienteEstado';
+                    }
+                },
+                error: function (error) {
+                    alert("Error: Intente de nuevo.");
+                }
+            });
+        });
+    });
+</script>
+
+}
+
+<div>
+    <h2 style="text-align:center" class="text-success">Aprobar Paciente</h2>
+</div>
+
+
+    
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp; &nbsp; Paciente</td>
+            <td>&nbsp; &nbsp; @Html.EditorFor(model => model.T_GDA_PACIENTE.nomPaciente, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })</td>
+            <td>&nbsp; &nbsp; DNI</td>
+            <td>&nbsp; &nbsp; @Html.EditorFor(model => model.T_GDA_PACIENTE.numDNI, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })</td>
+            <td>&nbsp; &nbsp; Medico</td>
+            <td>&nbsp; &nbsp; @Html.EditorFor(model => model.medSolicitante, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })</td>
+            <td>&nbsp; &nbsp; Estado</td>
+            <td>&nbsp; &nbsp; @Html.EditorFor(model => model.estPaciente, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })</td>
+        </tr>
+        <tr>
+            <td>&nbsp; &nbsp; Gravedad</td>
+            <td> &nbsp; &nbsp;
+                <select id="gravedad" name="gravedad" class="form-control">
+                    <option value="0">Por Defecto</option>
+                    <option value="1">Prioritario</option>
+                    <option value="2">Grave</option>
+                    <option value="3">Muy grave</option>
+                </select>
+            </td>
+            <td>&nbsp; &nbsp; Motivo</td>
+            <td>&nbsp; &nbsp; @Html.TextAreaFor(model => model.motDesaprobacion, new { htmlAttributes = new { @class = "form-control" } })</td>
+            <td>&nbsp; &nbsp; Observacion</td>
+            <td>&nbsp; &nbsp; @Html.TextAreaFor(model => model.obsDesaprobacion, new { htmlAttributes = new { @class = "form-control" } })</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    
+     
+        @Html.HiddenFor(model => model.idIngreso, new { htmlAttributes = new { @class = "form-control" } })
+       
+        @Html.HiddenFor(model => model.idPaciente, new { htmlAttributes = new { @class = "form-control" } })
+             
+   
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Aprobar" id="btnAprobar" class="btn btn-success" />
+            </div>
+        </div>
+   
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

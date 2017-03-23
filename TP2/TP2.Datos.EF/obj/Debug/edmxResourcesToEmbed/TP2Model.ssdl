@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TP2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="T_GCT_PROGRAMACION_MEDICA">
     <Key>
       <PropertyRef Name="idProgramacion" />
@@ -31,6 +41,18 @@
     <Property Name="nroHistoriaClinica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="diagnóstico" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="idPaciente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_GDA_INGRESOUCI">
+    <Key>
+      <PropertyRef Name="idIngreso" />
+    </Key>
+    <Property Name="idIngreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="estPaciente" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="medSolicitante" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="gravedad" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="motDesaprobacion" Type="varchar" MaxLength="20" />
+    <Property Name="obsDesaprobacion" Type="varchar" MaxLength="50" />
+    <Property Name="idPaciente" Type="int" />
   </EntityType>
   <EntityType Name="T_GDA_PACIENTE">
     <Key>
@@ -168,7 +190,7 @@
     <Key>
       <PropertyRef Name="idPacienteEstado" />
     </Key>
-    <Property Name="idPacienteEstado" Type="int" Nullable="false" />
+    <Property Name="idPacienteEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idPaciente" Type="int" />
     <Property Name="estado" Type="varchar" MaxLength="20" />
   </EntityType>
@@ -240,6 +262,18 @@
     <Property Name="horaInicio" Type="time" Precision="7" Nullable="false" />
     <Property Name="horaFin" Type="time" Precision="7" Nullable="false" />
   </EntityType>
+  <Association Name="FK__T_GDA_ING__idPac__6EF57B66">
+    <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="0..1" />
+    <End Role="T_GDA_INGRESOUCI" Type="Self.T_GDA_INGRESOUCI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_GDA_PACIENTE">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="T_GDA_INGRESOUCI">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EMPLEADO_ESPECIALIDAD_MEDICA">
     <End Role="T_GDA_ESPECIALIDAD__MEDICA" Type="Self.T_GDA_ESPECIALIDAD__MEDICA" Multiplicity="0..1" />
     <End Role="T_GG_EMPLEADO" Type="Self.T_GG_EMPLEADO" Multiplicity="*" />
@@ -577,9 +611,11 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="TP2ModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GCT_PROGRAMACION_MEDICA" EntityType="Self.T_GCT_PROGRAMACION_MEDICA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GDA_ESPECIALIDAD__MEDICA" EntityType="Self.T_GDA_ESPECIALIDAD__MEDICA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GDA_HISTORIA_CLINICA" EntityType="Self.T_GDA_HISTORIA_CLINICA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_GDA_INGRESOUCI" EntityType="Self.T_GDA_INGRESOUCI" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GDA_PACIENTE" EntityType="Self.T_GDA_PACIENTE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GG_EMPLEADO" EntityType="Self.T_GG_EMPLEADO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GG_INMUEBLE" EntityType="Self.T_GG_INMUEBLE" Schema="dbo" store:Type="Tables" />
@@ -602,6 +638,10 @@
     <EntitySet Name="T_GUQ_SOLICITUD_UCI" EntityType="Self.T_GUQ_SOLICITUD_UCI" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GUQ_TIPO_OPERACIÓN" EntityType="Self.T_GUQ_TIPO_OPERACIÓN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GUQ_TURNO_MEDICO" EntityType="Self.T_GUQ_TURNO_MEDICO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__T_GDA_ING__idPac__6EF57B66" Association="Self.FK__T_GDA_ING__idPac__6EF57B66">
+      <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
+      <End Role="T_GDA_INGRESOUCI" EntitySet="T_GDA_INGRESOUCI" />
+    </AssociationSet>
     <AssociationSet Name="FK_EMPLEADO_ESPECIALIDAD_MEDICA" Association="Self.FK_EMPLEADO_ESPECIALIDAD_MEDICA">
       <End Role="T_GDA_ESPECIALIDAD__MEDICA" EntitySet="T_GDA_ESPECIALIDAD__MEDICA" />
       <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />

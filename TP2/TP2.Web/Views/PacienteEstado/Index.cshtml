@@ -1,59 +1,62 @@
-﻿@model IEnumerable<TP2.Entidades.EF.T_GUQ_PACIENTE_ESTADO_UCI>
+﻿@model IEnumerable<TP2.Entidades.EF.T_GDA_INGRESOUCI>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    <h2 style="text-align:center" class="text-success">Aprobacion / Desaprobacion de pacientes UCI</h2>
+</div>
+
+<br />
+<br />
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.idPacienteEstado)
-        </th>
-        <th>
-            Paciente
+           Paciente
         </th>
         <th>
             DNI
         </th>
         <th>
-            Historia
+           Estado
         </th>
         <th>
-            Estado
+           Gravedad
         </th>
         <th>
-            Seleccionar opcion
+           Medico Solicitante
         </th>
-        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.idPacienteEstado)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.T_GDA_PACIENTE.nomPaciente)
         </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.T_GDA_PACIENTE.numDNI)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.T_GDA_PACIENTE.T_GDA_HISTORIA_CLINICA.nroHistoriaClinica)
+            @Html.DisplayFor(modelItem => item.estPaciente)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.estado)
+            @Html.DisplayFor(modelItem => item.gravedad)
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.DisplayFor(modelItem => item.medSolicitante)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Aprobar", "Aprobar", new { id=item.idIngreso  }) |
+            @Html.ActionLink("Desaprobar", "Desaprobar", new { id = item.idIngreso }) 
         </td>
     </tr>
 }

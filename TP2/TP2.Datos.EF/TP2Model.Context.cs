@@ -48,5 +48,7 @@ namespace TP2.Datos.EF
         public virtual DbSet<T_GUQ_TURNO_MEDICO> T_GUQ_TURNO_MEDICO { get; set; }
         public virtual DbSet<T_GUQ_PRESUPUESTO_PARTIDA> T_GUQ_PRESUPUESTO_PARTIDA { get; set; }
         public virtual DbSet<T_GUQ_PACIENTE_ESTADO_UCI> T_GUQ_PACIENTE_ESTADO_UCI { get; set; }
+        public virtual DbSet<T_GDA_INGRESOUCI> T_GDA_INGRESOUCI { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
