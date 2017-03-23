@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TP2ModelStoreContainer" CdmEntityContainer="RicardoPalmaEntities">
+    <EntitySetMapping Name="T_GCT_PROGRAMACION_MEDICA">
+      <EntityTypeMapping TypeName="TP2Model.T_GCT_PROGRAMACION_MEDICA">
+        <MappingFragment StoreEntitySet="T_GCT_PROGRAMACION_MEDICA">
+          <ScalarProperty Name="idProgramacion" ColumnName="idProgramacion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="anotaciones" ColumnName="anotaciones" />
+          <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+          <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="disPrestaciones" ColumnName="disPrestaciones" />
+          <ScalarProperty Name="prestaciones" ColumnName="prestaciones" />
+          <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GDA_ESPECIALIDAD__MEDICA">
+      <EntityTypeMapping TypeName="TP2Model.T_GDA_ESPECIALIDAD__MEDICA">
+        <MappingFragment StoreEntitySet="T_GDA_ESPECIALIDAD__MEDICA">
+          <ScalarProperty Name="idOperacion" ColumnName="idOperacion" />
+          <ScalarProperty Name="nomEspecialidad" ColumnName="nomEspecialidad" />
+          <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GDA_HISTORIA_CLINICA">
+      <EntityTypeMapping TypeName="TP2Model.T_GDA_HISTORIA_CLINICA">
+        <MappingFragment StoreEntitySet="T_GDA_HISTORIA_CLINICA">
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="diagnóstico" ColumnName="diagnóstico" />
+          <ScalarProperty Name="nroHistoriaClinica" ColumnName="nroHistoriaClinica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GDA_PACIENTE">
+      <EntityTypeMapping TypeName="TP2Model.T_GDA_PACIENTE">
+        <MappingFragment StoreEntitySet="T_GDA_PACIENTE">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="segmentacion" ColumnName="segmentacion" />
+          <ScalarProperty Name="fecNacimiento" ColumnName="fecNacimiento" />
+          <ScalarProperty Name="edad" ColumnName="edad" />
+          <ScalarProperty Name="mailPaciente" ColumnName="mailPaciente" />
+          <ScalarProperty Name="telPaciente" ColumnName="telPaciente" />
+          <ScalarProperty Name="dirPaciente" ColumnName="dirPaciente" />
+          <ScalarProperty Name="numDNI" ColumnName="numDNI" />
+          <ScalarProperty Name="nomPaciente" ColumnName="nomPaciente" />
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GG_EMPLEADO">
+      <EntityTypeMapping TypeName="TP2Model.T_GG_EMPLEADO">
+        <MappingFragment StoreEntitySet="T_GG_EMPLEADO">
+          <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+          <ScalarProperty Name="stdEmplead" ColumnName="stdEmplead" />
+          <ScalarProperty Name="costoHora" ColumnName="costoHora" />
+          <ScalarProperty Name="idArea" ColumnName="idArea" />
+          <ScalarProperty Name="dscProfesion" ColumnName="dscProfesion" />
+          <ScalarProperty Name="dscCargo" ColumnName="dscCargo" />
+          <ScalarProperty Name="fecIngreso" ColumnName="fecIngreso" />
+          <ScalarProperty Name="nomEmpleado" ColumnName="nomEmpleado" />
+          <ScalarProperty Name="nroDni" ColumnName="nroDni" />
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GG_INMUEBLE">
+      <EntityTypeMapping TypeName="TP2Model.T_GG_INMUEBLE">
+        <MappingFragment StoreEntitySet="T_GG_INMUEBLE">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="dscTipoInmueble" ColumnName="dscTipoInmueble" />
+          <ScalarProperty Name="idArea" ColumnName="idArea" />
+          <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GG_MODELO">
+      <EntityTypeMapping TypeName="TP2Model.T_GG_MODELO">
+        <MappingFragment StoreEntitySet="T_GG_MODELO">
+          <ScalarProperty Name="dscMarca" ColumnName="dscMarca" />
+          <ScalarProperty Name="nomModelo" ColumnName="nomModelo" />
+          <ScalarProperty Name="idModelo" ColumnName="idModelo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_AREA">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_AREA">
+        <MappingFragment StoreEntitySet="T_GUQ_AREA">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idArea" ColumnName="idArea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_CAMA">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_CAMA">
+        <MappingFragment StoreEntitySet="T_GUQ_CAMA">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="idModelo" ColumnName="idModelo" />
+          <ScalarProperty Name="idCama" ColumnName="idCama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_CONSOLIDADO_PRESUPUESTO">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_CONSOLIDADO_PRESUPUESTO">
+        <MappingFragment StoreEntitySet="T_GUQ_CONSOLIDADO_PRESUPUESTO">
+          <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="idConsolidadoPresupuesto" ColumnName="idConsolidadoPresupuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_ESTADÍSTICA_RECURSOS">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_ESTADÍSTICA_RECURSOS">
+        <MappingFragment StoreEntitySet="T_GUQ_ESTADÍSTICA_RECURSOS">
+          <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+          <ScalarProperty Name="montoHistórico" ColumnName="montoHistórico" />
+          <ScalarProperty Name="idArea" ColumnName="idArea" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="mes" ColumnName="mes" />
+          <ScalarProperty Name="idEstadisticaRecurso" ColumnName="idEstadisticaRecurso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_INGRESO_SALIDA_PACIENTE">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_INGRESO_SALIDA_PACIENTE">
+        <MappingFragment StoreEntitySet="T_GUQ_INGRESO_SALIDA_PACIENTE">
+          <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaTraslado" ColumnName="fechaTraslado" />
+          <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+          <ScalarProperty Name="idRegistro" ColumnName="idRegistro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_INSUMO">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_INSUMO">
+        <MappingFragment StoreEntitySet="T_GUQ_INSUMO">
+          <ScalarProperty Name="costoInsumo" ColumnName="costoInsumo" />
+          <ScalarProperty Name="dscInsumo" ColumnName="dscInsumo" />
+          <ScalarProperty Name="idInsumo" ColumnName="idInsumo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_INSUMO_TIPOOPERACION">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_INSUMO_TIPOOPERACION">
+        <MappingFragment StoreEntitySet="T_GUQ_INSUMO_TIPOOPERACION">
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idInsumo" ColumnName="idInsumo" />
+          <ScalarProperty Name="idOperación" ColumnName="idOperación" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_PARTIDA">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_PARTIDA">
+        <MappingFragment StoreEntitySet="T_GUQ_PARTIDA">
+          <ScalarProperty Name="dscPartida" ColumnName="dscPartida" />
+          <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_PRESUPUESTO">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_PRESUPUESTO">
+        <MappingFragment StoreEntitySet="T_GUQ_PRESUPUESTO">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="idArea" ColumnName="idArea" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_RESERVA_SALA_OPERACIÓN">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_RESERVA_SALA_OPERACIÓN">
+        <MappingFragment StoreEntitySet="T_GUQ_RESERVA_SALA_OPERACIÓN">
+          <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+          <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="duración" ColumnName="duración" />
+          <ScalarProperty Name="idOperación" ColumnName="idOperación" />
+          <ScalarProperty Name="idReserva" ColumnName="idReserva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_SOLICITUD_UCI">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_SOLICITUD_UCI">
+        <MappingFragment StoreEntitySet="T_GUQ_SOLICITUD_UCI">
+          <ScalarProperty Name="nroHistoriaClinica" ColumnName="nroHistoriaClinica" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaSolicitud" ColumnName="fechaSolicitud" />
+          <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_TIPO_OPERACIÓN">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_TIPO_OPERACIÓN">
+        <MappingFragment StoreEntitySet="T_GUQ_TIPO_OPERACIÓN">
+          <ScalarProperty Name="duracion" ColumnName="duracion" />
+          <ScalarProperty Name="costoTipoOperacion" ColumnName="costoTipoOperacion" />
+          <ScalarProperty Name="dscTipoOperación" ColumnName="dscTipoOperación" />
+          <ScalarProperty Name="idOperación" ColumnName="idOperación" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_TURNO_MEDICO">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_TURNO_MEDICO">
+        <MappingFragment StoreEntitySet="T_GUQ_TURNO_MEDICO">
+          <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+          <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+          <ScalarProperty Name="dia" ColumnName="dia" />
+          <ScalarProperty Name="idTurnoMedico" ColumnName="idTurnoMedico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" TypeName="TP2Model.T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO" StoreEntitySet="T_GUQ__DETALLE_CONSOLIDADO_PRESUPUESTO">
+      <EndProperty Name="T_GUQ_PRESUPUESTO">
+        <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
+      </EndProperty>
+      <EndProperty Name="T_GUQ_CONSOLIDADO_PRESUPUESTO">
+        <ScalarProperty Name="idConsolidadoPresupuesto" ColumnName="idConsolidadoPresupuesto" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_GUQ_DETALLE_TURNO_MEDICO" TypeName="TP2Model.T_GUQ_DETALLE_TURNO_MEDICO" StoreEntitySet="T_GUQ_DETALLE_TURNO_MEDICO">
+      <EndProperty Name="T_GUQ_TURNO_MEDICO">
+        <ScalarProperty Name="idTurnoMedico" ColumnName="idTurnoMedico" />
+      </EndProperty>
+      <EndProperty Name="T_GG_EMPLEADO">
+        <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="T_GUQ_INMUEBLE_TIPO_OPERACION" TypeName="TP2Model.T_GUQ_INMUEBLE_TIPO_OPERACION" StoreEntitySet="T_GUQ_INMUEBLE_TIPO_OPERACION">
+      <EndProperty Name="T_GUQ_TIPO_OPERACIÓN">
+        <ScalarProperty Name="idOperación" ColumnName="idOperación" />
+      </EndProperty>
+      <EndProperty Name="T_GG_INMUEBLE">
+        <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="T_GUQ_PRESUPUESTO_PARTIDA">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA">
+        <MappingFragment StoreEntitySet="T_GUQ_PRESUPUESTO_PARTIDA">
+          <ScalarProperty Name="montoPartida" ColumnName="montoPartida" />
+          <ScalarProperty Name="idPartida" ColumnName="idPartida" />
+          <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
+          <ScalarProperty Name="idPresupuestoPartida" ColumnName="idPresupuestoPartida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_GUQ_PACIENTE_ESTADO_UCI">
+      <EntityTypeMapping TypeName="TP2Model.T_GUQ_PACIENTE_ESTADO_UCI">
+        <MappingFragment StoreEntitySet="T_GUQ_PACIENTE_ESTADO_UCI">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="idPacienteEstado" ColumnName="idPacienteEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

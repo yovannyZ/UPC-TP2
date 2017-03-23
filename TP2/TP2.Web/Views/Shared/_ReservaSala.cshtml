@@ -1,0 +1,9 @@
+﻿@model  IEnumerable<string>
+<form>
+    @foreach (var item in Model)
+    {
+        <label class="radio-inline">
+            <input type="radio" value="@item" id="rbHorario" name="rbHorario" onchange="obtenerMedicos()">@item
+        </label>
+    }
+</form>

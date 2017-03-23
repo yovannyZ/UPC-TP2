@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TP2.Entidades.EF.T_GUQ_PRESUPUESTO>
+
+@{
+    ViewBag.Title = "Presupuesto";
+}
+
+<h2>Presupuesto</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Presupuesto")" class="btn btn-success ">
+        <span class="glyphicon glyphicon-plus-sign"></span> Generar Presupuesto
+    </a>
+    
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            Año
+        </th>
+        <th>
+            Area
+        </th>
+        <th>
+            Monto
+        </th>
+        <th>
+           Estado
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.anio)
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_GUQ_AREA.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.idPresupuesto }) 
+        </td>
+        <td>
+            @Html.ActionLink("Excel", "ExportToExcel", new { id = item.idPresupuesto })
+        </td>
+        <td>
+            @Html.ActionLink("PDF", "ExportPDF", new { id = item.idPresupuesto })
+        </td>
+    </tr>
+}
+
+</table>

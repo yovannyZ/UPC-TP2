@@ -1,0 +1,18 @@
+﻿@model  IEnumerable<TP2.Entidades.EF.T_GDA_PACIENTE>
+<table class="table table-condensed table-striped table-bordered" id="tblPaciente">
+    <tr>
+        <td>Nombre</td>
+        <td>Direcci&oacute;n</td>
+        <td></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.nomPaciente</td>
+            <td>@item.numDNI</td>
+            <td>
+                <input type="radio" value="@item.idPaciente" id="optPaciente" name="rbPaciente">
+            </td>
+        </tr>
+    }
+</table>

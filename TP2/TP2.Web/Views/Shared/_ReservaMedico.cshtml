@@ -1,0 +1,9 @@
+﻿@model  IEnumerable<TP2.Entidades.EF.T_GG_EMPLEADO>
+<form>
+    @foreach (var item in Model)
+    {
+        <div class="radio col-md-12">
+            <label><input type="radio" name="rbMedico" value="@item.idEmpleado">@item.nomEmpleado</label>
+        </div>
+    }
+</form>

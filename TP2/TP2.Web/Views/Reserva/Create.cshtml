@@ -1,0 +1,265 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Script/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tipo").change(function () {
+                var tipo = $("#tipo").val();
+                limpiarDatos();
+                $.ajax({
+                    url: "/Reserva/ObtenerDuracion",
+                    type: 'GET',
+                    data: { tipo: tipo },
+                    success: function (data) {
+                        $('#hora').val(data);
+                    }
+                });
+            });
+
+            $("#fecha").datepicker({
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                dateFormat: "dd/mm/yy",
+                minDate: 0,
+                changeMonth: true,
+                changeYear: true
+            });
+
+            $("#buscar").click(function () {
+                var tipo = $("#tipo").val();
+                var fecha = $('#fecha').val();
+                $("#cboSala").val('')
+                limpiarDatos();
+                obtenerSalas(tipo);
+                $("#data").show();
+            });
+
+            $("#cboSala").change(function (index) {
+                $("#medico").load('@Url.Action("MedicoPartial", "Reserva")' + '?tipo=0&fecha=01/01/1900&hora=00:00')
+                var fecha = $('#fecha').val();
+                var sala = $("#cboSala").val();
+                var tipo = $("#tipo").val();
+                obtenerHorarios(fecha, sala, tipo);
+            });
+
+            $('#jaButton').click(function () {
+                var tipo = $("#tipo").val();
+                var fecha = $('#fecha').val();
+                var hora = $('input[name="rbHorario"]:checked').val();
+                $.ajax({
+                    url: '@Url.Action("PacientePartial", "Reserva")',
+                    type: 'GET',
+                    data: { tipo: tipo, fecha: fecha, hora: hora }
+                }).success(function (data) {
+                    $(".modal-body").html(data);
+                });
+            });
+
+            $("#btnAceptar").click(function () {
+                var idPaciente = $('input[name="rbPaciente"]:checked').val();
+                var nombre = $('#tblPaciente').find('[type="radio"]:checked').map(function () {
+                    return $(this).closest('tr').find('td:nth-child(1)').text();
+                }).get();
+                var dni = $('#tblPaciente').find('[type="radio"]:checked').map(function () {
+                    return $(this).closest('tr').find('td:nth-child(2)').text();
+                }).get();
+
+                $('#txtPaciente').val(nombre);
+                $('#hfIdPaciente').val(idPaciente);
+
+                $("#modalbox").modal("hide");
+            });
+
+            $("#btnCrear").click(function () {
+                var tipo = $("#tipo").val();
+                var duracion = $('#hora').val();
+                var fecha = $('#fecha').val();
+                var inicio = $('input[name="rbHorario"]:checked').val();
+                var medico = $('input[name="rbMedico"]:checked').val();
+                var paciente = $('#hfIdPaciente').val();
+                var inmueble = $("#cboSala").val();
+                $.ajax({
+                    url: "/Reserva/Create",
+                    type: 'POST',
+                    data: {
+                        idOperación: tipo, duración: duracion, fechaInicio: fecha,
+                        horaInicio: inicio, idPaciente: paciente, idInmueble: inmueble,
+                        estado: 'RESERVADO', idEmpleado: medico
+                    },
+                    success: function (data) {
+                        alert(data);
+                        if (data.indexOf("Error") == -1) {
+                            window.location.href = '/Reserva';
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error: Intente de nuevo.");
+                    }
+                });
+            });
+
+        });
+
+        function obtenerMedicos() {
+            var tipo = $("#tipo").val();
+            var fecha = $('#fecha').val();
+            var hora = $('input[name="rbHorario"]:checked').val();
+            $.ajax({
+                url: "/Reserva/MedicoPartial",
+                type: 'GET',
+                data: { tipo: tipo, fecha: fecha, hora: hora },
+                success: function (data) {
+                    jQuery("#medico").html(data);
+                },
+                error: function (error) {
+                    alert("Error: No se pudo obtener datos de los médicos.");
+                }
+            });
+
+            $.ajax({
+                url: '@Url.Action("PacientePartial", "Reserva")',
+                type: 'GET',
+                data: { tipo: tipo, fecha: fecha, hora: hora }
+            }).success(function (data) {
+                $(".modal-body").html(data);
+            });
+        }
+
+        function obtenerSalas(tipo) {
+            $.ajax({
+                url: "/Reserva/ObtenerSalas",
+                type: 'GET',
+                data: { tipo: tipo },
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].Nombre, data[i].Id);
+                        $('#cboSala').append(opt);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Error: No se pudo obtener datos de las salas.");
+                }
+            });
+        }
+
+        function obtenerHorarios(fecha, sala, tipo) {
+            $.ajax({
+                url: "/Reserva/HorarioPartial",
+                type: 'GET',
+                data: { fecha: fecha, inmueble: sala, tipo: tipo },
+                success: function (data) {
+                    $("#horario").html(data);
+                },
+                error: function (error) {
+                    alert("Error: No se pudo obtener los datos de los horarios.");
+                }
+            });
+        }
+
+        function limpiarDatos() {
+            $('#cboSala').empty();
+            $('#cboSala').append('<option value="">--Seleccione la sala--</option>').val('')
+            $("#horario").load('@Url.Action("HorarioPartial", "Reserva")' + '?fecha=01/01/1900&tipo=0&inmueble=0')
+            $("#medico").load('@Url.Action("MedicoPartial", "Reserva")' + '?tipo=0&fecha=01/01/1900&hora=00:00')
+        }
+    </script>
+}
+
+<h2>Nueva Reserva</h2>
+<div class="row">
+    <form class="form-inline">
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="TipoOperacionList">Tipo de operaci&oacute;n:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                @Html.DropDownList("tipo", new SelectList(ViewBag.TipoOperacionList, "idOperación", "dscTipoOperación"), "--Seleccione el tipo--", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <label class="mr-sm-2" for="fecha">Fecha:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("fecha", null, new { @class = "form-control" })
+                <span class="input-group-btn">
+                    <button type="button" class="btn" id="buscar">Consultar</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+<hr>
+<div class="row" style="display:none" id="data">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                            <select id="cboSala" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="panel-body" id="horario"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">M&eacute;dico</div>
+                    <div class="panel-body" id="medico"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="mr-sm-2" for="fecha">Paciente:</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <span class="input-group-addon"><span class=" glyphicon glyphicon-user"></span></span>
+                    @Html.Hidden("hfIdPaciente")
+                    @Html.TextBox("txtPaciente", null, new { @class = "form-control", disabled = "disabled" })
+                    <span class="input-group-btn">
+                        <a type="button" class="btn btn-default" href="#modalbox" data-toggle="modal">...</a>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <label class="mr-sm-2" for="fecha">N° horas:</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    @Html.TextBox("hora", null, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" id="btnCrear">Registrar</button>
+            </div>
+            <div class="col-md-2">
+                <a href="@Url.Action("Index", "Reserva")" class="btn btn-default">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalbox" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Paciente</h1>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" id="btnAceptar" data-bind="click:save">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

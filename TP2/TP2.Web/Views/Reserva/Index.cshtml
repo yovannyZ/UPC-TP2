@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TP2.Entidades.EF.T_GUQ_RESERVA_SALA_OPERACIÓN>
+
+@{
+    ViewBag.Title = "Reserva";
+}
+
+<h2>Reserva</h2>
+
+<p>
+    @Html.ActionLink("Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tipo
+        </th>
+        <th>
+            Paciente
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Hora
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_GUQ_TIPO_OPERACIÓN.dscTipoOperación)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_GDA_PACIENTE.nomPaciente)
+        </td>
+        <td>
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.fechaInicio))
+        </td>
+        <td>
+            @Convert.ToString(string.Format("{0:HH:mm}", item.fechaInicio))
+        </td>
+    </tr>
+}
+
+</table>

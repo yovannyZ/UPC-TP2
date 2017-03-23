@@ -1,0 +1,12 @@
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\TP2.Datos.EF.dll.config
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\TP2.Datos.EF.dll
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\TP2.Datos.EF.pdb
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\EntityFramework.dll
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\TP2.Entidades.EF.dll
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\TP2.Entidades.EF.pdb
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\EntityFramework.xml
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\obj\Debug\TP2.Datos.EF.csprojResolveAssemblyReference.cache
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\obj\Debug\TP2.Datos.EF.dll
+C:\Users\Miguel\Documents\GitHub\tp2-Oscar\TP2\TP2.Datos.EF\obj\Debug\TP2.Datos.EF.pdb

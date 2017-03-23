@@ -1,0 +1,490 @@
+﻿@model TP2.Entidades.EF.T_GUQ_PRESUPUESTO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/Script/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(function () {
+            $('#anio').datepicker({
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy',
+                onClose: function (dateText, inst) {
+                    $(this).datepicker('setDate', new Date(inst.selectedYear, 1));
+                }
+            });
+
+            EliminarFilas();
+            var IdPresupuesto = $("#idPresupuesto").val();
+           
+            $.ajax({
+                url: "/Presupuesto/ListarPartidas",
+                type: 'POST',
+                data: {
+                    IdPresupuesto: IdPresupuesto
+                },
+                success: function (data) {
+
+                    if (data == "1") {
+                        alert("Periodo no valido");
+                        window.location.href = '/Presupuesto';
+                    } else if (data == "2") {
+                        alert("No se puede editar");
+                        window.location.href = '/Presupuesto';
+                    } else {
+                        var montoTotal = 0.0;
+                        $("#monto").val(montoTotal);
+                        for (var i = 0; i < data.length; i++) {
+                            var tds = tds += '<tr class = "filas">';
+                            tds += '<td>' + data[i].idPartida + '</td>';
+                            tds += '<td>' + data[i].descripcion + '</td>';
+                            tds += '<td>' + data[i].monto + '</td>';
+                            tds += '<td><button   class = "EditarPartida btn btn-link" > Editar </button> </td>';
+                            tds += '<td><button  class = "EliminarPartida btn btn-link" > Eliminar </button> </td>';
+                            tds += '</tr>';
+
+                            montoTotal = montoTotal + data[i].monto;
+
+                        }
+
+                        $("#txtMontoTotal").empty(montoTotal);
+                        $("#txtMontoTotal").text(montoTotal);
+                        $("#tblPartida").append(tds);
+
+                        $(".EditarPartida").off("click");
+                        $(".EditarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EditarPartidaGet(id);
+                        });
+
+                        $(".EliminarPartida").off("click");
+                        $(".EliminarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EliminarPartidas(id);
+                        });
+                    }
+                    
+
+                },
+                error: function (error) {
+                    alert("Error: Intente de nuevo.");
+                }
+            });
+
+
+        });
+
+        $(document).ready(function () {
+
+            $("#btnCrear").click(function () {
+                var idPresupuesto = $('#idPresupuesto').val();
+                var idArea = $('#AreaList').val();
+                $.ajax({
+                    url: "/Presupuesto/Edit",
+                    type: 'POST',
+                    data: {
+                        idPresupuesto: idPresupuesto, idArea: idArea
+                    },
+                    success: function (data) {
+                        alert(data);
+                        if (data.indexOf("Error") == -1) {
+                            window.location.href = '/Presupuesto';
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error: Intente de nuevo.");
+                    }
+                });
+            });
+
+
+
+            $("#btnAgregarPartida").on("click", function () {
+                
+                var anio = $("#anio").val();
+                var partida = $('#PartidaList').val();
+                var idArea = $('#AreaList').val();
+                var monto = $('#monto').val();
+                $.ajax({
+                    url: "/Presupuesto/AgregarPartida",
+                    type: 'POST',
+                    data: {
+                        anio: anio, partida: partida, idArea: idArea,monto:monto
+                    },
+                    success: function (data) {
+
+
+                        if (data == "Error") {
+                            alert("Usted ya agrego esa  partida");
+                        } else {
+                            var montoTotal = 0.0;
+                            EliminarFilas();
+                            for (var i = 0; i < data.length; i++) {
+                                var tds = tds += '<tr class = "filas">';
+                                tds += '<td>' + data[i].idPartida + '</td>';
+                                tds += '<td>' + data[i].descripcion + '</td>';
+                                tds += '<td>' + data[i].monto + '</td>';
+                                tds += '<td><button   class = "EditarPartida btn btn-link" > Editar </button> </td>';
+                                tds += '<td><button  class = "EliminarPartida btn btn-link" > Eliminar </button> </td>';
+                                tds += '</tr>';
+
+                                montoTotal = montoTotal + data[i].monto;
+
+                            }
+
+                            $("#txtMontoTotal").empty(montoTotal);
+                            $("#txtMontoTotal").text(montoTotal);
+                            $("#tblPartida").append(tds);
+
+                            $(".EditarPartida").off("click");
+                            $(".EditarPartida").on("click", function () {
+                                var id = $(this).parents("tr").find("td").eq(0).html();
+                                EditarPartidaGet(id);
+                            });
+
+                            $(".EliminarPartida").off("click");
+                            $(".EliminarPartida").on("click", function () {
+                                var id = $(this).parents("tr").find("td").eq(0).html();
+                                EliminarPartidas(id);
+                            });
+                        }
+
+                    },
+                    error: function (error) {
+                        alert("Error: Intente de nuevo.");
+                    }
+                });
+            });
+
+
+            $("#PartidaList").change(function () {
+
+                var partida = $("#PartidaList option:selected").val();
+                var idArea = $('#AreaList').val();
+                var anio = $("#anio").val();
+                $.ajax({
+                    url: "/EstadisticaRecursos/Index",
+                    type: 'POST',
+                    data: {
+                        anio: anio, partida: partida, idArea: idArea
+                    },
+                    success: function (data) {
+                        $("#monto").val(data);
+
+                    },
+                    error: function (error) {
+
+                    }
+                });
+            });
+
+            $("#btnActualizar").click(function () {
+
+                var monto = $('#mont').val();
+                var idPartida = $('#id').val();
+
+                $.ajax({
+                    url: "/Presupuesto/EditarPartida",
+                    type: 'POST',
+                    data: {
+                        monto: monto, idPartida: idPartida
+                    },
+                    success: function (data) {
+                        var montoTotal = 0.0;
+                        EliminarFilas();
+                        for (var i = 0; i < data.length; i++) {
+                            var tds = tds += '<tr class = "filas">';
+                            tds += '<td>' + data[i].idPartida + '</td>';
+                            tds += '<td>' + data[i].descripcion + '</td>';
+                            tds += '<td>' + data[i].monto + '</td>';
+                            tds += '<td><button   class = "EditarPartida btn btn-link" > Editar </button> </td>';
+                            tds += '<td><button  class = "EliminarPartida btn btn-link" > Eliminar </button> </td>';
+                            tds += '</tr>';
+                            montoTotal = montoTotal + data[i].monto;
+
+                        }
+
+                        $("#txtMontoTotal").empty(montoTotal);
+                        $("#txtMontoTotal").text(montoTotal);
+                        $("#tblPartida").append(tds);
+
+                        $(".EditarPartida").off("click");
+                        $(".EditarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EditarPartidaGet(id);
+                        });
+
+                        $(".EliminarPartida").off("click");
+                        $(".EliminarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EliminarPartidas(id);
+                        });
+
+                        $('#modalEditarPartida').modal('hide');
+                    },
+                    error: function (error) {
+                        alert("Error: Intente de nuevo.");
+                    }
+                });
+            });
+
+            $('.input_numerico').keypress(function (tecla) {
+
+                if ((tecla.charCode < 48 || tecla.charCode > 57) && (tecla.charCode != 46) && (tecla.charCode != 8)) {
+                    return false;
+                } else {
+                    var len = $('.input_numerico').val().length;
+                    var index = $('.input_numerico').val().indexOf('.');
+
+                    if (index > 0 && tecla.charCode == 46) {
+                        return false;
+                    }
+
+                    if (index > 0) {
+                        var CharAfterdot = (len + 1) - index;
+                        if (CharAfterdot > 3) {
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
+            });
+
+
+        });
+
+        function EliminarFilas() {
+            $("tbody").empty();
+            $(".filas").remove();
+
+
+        }
+
+        function EditarPartidaGet(id) {
+
+            $.ajax({
+                url: "/Presupuesto/EditarPartida",
+                type: 'GET',
+                data: {
+                    idPartida: id
+                },
+                success: function (data) {
+                    $('#id').val(data.idPartida);
+                    $('#desc').val(data.descripcion);
+                    $('#mont').val(data.monto);
+                    $('#modalEditarPartida').modal('show');
+
+                },
+                error: function (error) {
+                    alert("Error: Intente de nuevo.");
+                }
+            });
+        }
+
+        function EliminarPartidas(id) {
+          
+                $.ajax({
+                    url: "/Presupuesto/EliminarPartida",
+                    type: 'POST',
+                    data: {
+                        idPartida: id
+                    },
+                    success: function (data) {
+                        var montoTotal = 0.0;
+                        EliminarFilas();
+                        for (var i = 0; i < data.length; i++) {
+                            var tds = tds += '<tr class = "filas">';
+                            tds += '<td>' + data[i].idPartida + '</td>';
+                            tds += '<td>' + data[i].descripcion + '</td>';
+                            tds += '<td>' + data[i].monto + '</td>';
+                            tds += '<td><button   class = "EditarPartida btn btn-link" > Editar </button> </td>';
+                            tds += '<td><button  class = "EliminarPartida btn btn-link" > Eliminar </button> </td>';
+                            tds += '</tr>';
+                            montoTotal = montoTotal + data[i].monto;
+
+                        }
+
+                        $("#txtMontoTotal").empty(montoTotal);
+                        $("#txtMontoTotal").text(montoTotal);
+                        $("#tblPartida").append(tds);
+
+                        $(".EditarPartida").off("click");
+                        $(".EditarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EditarPartidaGet(id);
+                        });
+
+                        $(".EliminarPartida").off("click");
+                        $(".EliminarPartida").on("click", function () {
+                            var id = $(this).parents("tr").find("td").eq(0).html();
+                            EliminarPartidas(id);
+                        });
+                        alert("Partida eliminada");
+                    },
+                    error: function (error) {
+                        alert("Error: Intente de nuevo.");
+                    }
+                });
+            
+
+        }
+    </script>
+
+}
+
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
+
+
+
+<div class="form-horizontal">
+    <h4>Editar Presupuesto</h4>
+    <hr />
+
+    <div class="row">
+
+        
+               
+                @Html.Hidden("idPresupuesto", null, new { @class = "form-control", @readonly = "true" })
+           
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="fecha">Fecha:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("anio", null, new { @class = "form-control" ,@readonly = "true"})
+            </div>
+        </div>
+
+       
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="TipoOperacionList">Area:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                @Html.DropDownList("AreaList", null, htmlAttributes: new { @class = "form-control" ,@readonly = "true"})
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="TipoOperacionList">Partida:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-list"></span></span>
+                @Html.DropDownList("PartidaList",null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+       
+        <div class="col-sm-6">
+            <label class="mr-sm-2" for="fecha">Monto:</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+                @Html.TextBox("monto", null, new { @class = "form-control input_numerico" })
+            </div>
+        </div>
+
+    
+        <br />
+
+    </div >
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <input type="button" value="Agregar Partida" class="btn btn-default" id="btnAgregarPartida" />
+            </div>
+        </div>
+
+       
+    </div>
+
+
+    <br />
+
+
+    <div class="row" id="Partidas">
+        <div class="col-md-12">
+            <table class="table table-striped small" id="tblPartida">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Descripcion</th>
+                        <th>Monto</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Monto Total : <span id="txtMontoTotal">0.0</span></h4>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <input type="button" value="Actualizar Presupuesto" class="btn btn-success" id="btnCrear" />
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+<div>
+    @Html.ActionLink("Regresar atras", "Index")
+</div>
+
+    <!-- Modal -->
+    <div id="modalEditarPartida" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Editar Partida</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="id">Id:</label>
+                            <input type="text" class="form-control" id="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Descripción:</label>
+                            <input type="text" class="form-control" id="desc" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Monto:</label>
+                            <input type="number" step="0.01" min="0" class="form-control " id="mont">
+                        </div>
+
+                        <button type="button" class="btn btn-default" id="btnActualizar">Actualizar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
