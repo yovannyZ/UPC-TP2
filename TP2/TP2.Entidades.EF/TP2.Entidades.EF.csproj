@@ -103,9 +103,6 @@
     <Compile Include="T_GUQ_INSUMO_TIPOOPERACION.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_GUQ_PACIENTE_ESTADO_UCI.cs">
-      <DependentUpon>TP2Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="T_GUQ_PARTIDA.cs">
       <DependentUpon>TP2Model.tt</DependentUpon>
     </Compile>

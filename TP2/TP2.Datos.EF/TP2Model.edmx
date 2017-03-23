@@ -191,14 +191,6 @@
           <Property Name="idInsumo" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="T_GUQ_PACIENTE_ESTADO_UCI">
-          <Key>
-            <PropertyRef Name="idPacienteEstado" />
-          </Key>
-          <Property Name="idPacienteEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idPaciente" Type="int" />
-          <Property Name="estado" Type="varchar" MaxLength="20" />
-        </EntityType>
         <EntityType Name="T_GUQ_PARTIDA">
           <Key>
             <PropertyRef Name="idPartida" />
@@ -312,18 +304,6 @@
             </Principal>
             <Dependent Role="T_GUQ_ESTADÍSTICA_RECURSOS">
               <PropertyRef Name="idPartida" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_paciente">
-          <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="0..1" />
-          <End Role="T_GUQ_PACIENTE_ESTADO_UCI" Type="Self.T_GUQ_PACIENTE_ESTADO_UCI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPaciente" />
-            </Principal>
-            <Dependent Role="T_GUQ_PACIENTE_ESTADO_UCI">
-              <PropertyRef Name="idPaciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -635,7 +615,6 @@
           <EntitySet Name="T_GUQ_INMUEBLE_TIPO_OPERACION" EntityType="Self.T_GUQ_INMUEBLE_TIPO_OPERACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_INSUMO" EntityType="Self.T_GUQ_INSUMO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_INSUMO_TIPOOPERACION" EntityType="Self.T_GUQ_INSUMO_TIPOOPERACION" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_GUQ_PACIENTE_ESTADO_UCI" EntityType="Self.T_GUQ_PACIENTE_ESTADO_UCI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_PARTIDA" EntityType="Self.T_GUQ_PARTIDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_PRESUPUESTO" EntityType="Self.T_GUQ_PRESUPUESTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_GUQ_PRESUPUESTO_PARTIDA" EntityType="Self.T_GUQ_PRESUPUESTO_PARTIDA" Schema="dbo" store:Type="Tables" />
@@ -658,10 +637,6 @@
           <AssociationSet Name="FK_Estadísticas_recursos_idPartidas" Association="Self.FK_Estadísticas_recursos_idPartidas">
             <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
             <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-          </AssociationSet>
-          <AssociationSet Name="fk_paciente" Association="Self.fk_paciente">
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-            <End Role="T_GUQ_PACIENTE_ESTADO_UCI" EntitySet="T_GUQ_PACIENTE_ESTADO_UCI" />
           </AssociationSet>
           <AssociationSet Name="FK_Reserva_sala_operación_IdEmpleado" Association="Self.FK_Reserva_sala_operación_IdEmpleado">
             <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />
@@ -882,11 +857,6 @@
             <End Role="T_GUQ_PRESUPUESTO" EntitySet="T_GUQ_PRESUPUESTO" />
             <End Role="T_GUQ_PRESUPUESTO_PARTIDA" EntitySet="T_GUQ_PRESUPUESTO_PARTIDA" />
           </AssociationSet>
-          <EntitySet Name="T_GUQ_PACIENTE_ESTADO_UCI" EntityType="TP2Model.T_GUQ_PACIENTE_ESTADO_UCI" />
-          <AssociationSet Name="fk_paciente" Association="TP2Model.fk_paciente">
-            <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-            <End Role="T_GUQ_PACIENTE_ESTADO_UCI" EntitySet="T_GUQ_PACIENTE_ESTADO_UCI" />
-          </AssociationSet>
           <EntitySet Name="T_GDA_INGRESOUCI" EntityType="TP2Model.T_GDA_INGRESOUCI" />
           <AssociationSet Name="FK__T_GDA_ING__idPac__6EF57B66" Association="TP2Model.FK__T_GDA_ING__idPac__6EF57B66">
             <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
@@ -948,7 +918,6 @@
           <Property Name="estado" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_GDA_HISTORIA_CLINICA" Relationship="TP2Model.FK_T_GDA_HISTORIA_CLINICA4" FromRole="T_GDA_PACIENTE" ToRole="T_GDA_HISTORIA_CLINICA" />
           <NavigationProperty Name="T_GUQ_RESERVA_SALA_OPERACIÓN" Relationship="TP2Model.FK_T_GUQ_RESERVA_SALA_OPERACIÓN2" FromRole="T_GDA_PACIENTE" ToRole="T_GUQ_RESERVA_SALA_OPERACIÓN" />
-          <NavigationProperty Name="T_GUQ_PACIENTE_ESTADO_UCI" Relationship="TP2Model.fk_paciente" FromRole="T_GDA_PACIENTE" ToRole="T_GUQ_PACIENTE_ESTADO_UCI" />
           <NavigationProperty Name="T_GDA_INGRESOUCI" Relationship="TP2Model.FK__T_GDA_ING__idPac__6EF57B66" FromRole="T_GDA_PACIENTE" ToRole="T_GDA_INGRESOUCI" />
         </EntityType>
         <EntityType Name="T_GG_EMPLEADO">
@@ -1416,27 +1385,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="T_GUQ_PACIENTE_ESTADO_UCI">
-          <Key>
-            <PropertyRef Name="idPacienteEstado" />
-          </Key>
-          <Property Name="idPacienteEstado" Type="Int32" Nullable="false" />
-          <Property Name="idPaciente" Type="Int32" />
-          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="T_GDA_PACIENTE" Relationship="TP2Model.fk_paciente" FromRole="T_GUQ_PACIENTE_ESTADO_UCI" ToRole="T_GDA_PACIENTE" />
-        </EntityType>
-        <Association Name="fk_paciente">
-          <End Type="TP2Model.T_GDA_PACIENTE" Role="T_GDA_PACIENTE" Multiplicity="0..1" />
-          <End Type="TP2Model.T_GUQ_PACIENTE_ESTADO_UCI" Role="T_GUQ_PACIENTE_ESTADO_UCI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_GDA_PACIENTE">
-              <PropertyRef Name="idPaciente" />
-            </Principal>
-            <Dependent Role="T_GUQ_PACIENTE_ESTADO_UCI">
-              <PropertyRef Name="idPaciente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="T_GDA_INGRESOUCI">
           <Key>
             <PropertyRef Name="idIngreso" />
@@ -1727,15 +1675,6 @@
                 <ScalarProperty Name="idPartida" ColumnName="idPartida" />
                 <ScalarProperty Name="idPresupuesto" ColumnName="idPresupuesto" />
                 <ScalarProperty Name="idPresupuestoPartida" ColumnName="idPresupuestoPartida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_GUQ_PACIENTE_ESTADO_UCI">
-            <EntityTypeMapping TypeName="TP2Model.T_GUQ_PACIENTE_ESTADO_UCI">
-              <MappingFragment StoreEntitySet="T_GUQ_PACIENTE_ESTADO_UCI">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
-                <ScalarProperty Name="idPacienteEstado" ColumnName="idPacienteEstado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

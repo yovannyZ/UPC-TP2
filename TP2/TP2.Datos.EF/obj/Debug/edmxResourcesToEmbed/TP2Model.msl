@@ -253,15 +253,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="T_GUQ_PACIENTE_ESTADO_UCI">
-      <EntityTypeMapping TypeName="TP2Model.T_GUQ_PACIENTE_ESTADO_UCI">
-        <MappingFragment StoreEntitySet="T_GUQ_PACIENTE_ESTADO_UCI">
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
-          <ScalarProperty Name="idPacienteEstado" ColumnName="idPacienteEstado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="T_GDA_INGRESOUCI">
       <EntityTypeMapping TypeName="TP2Model.T_GDA_INGRESOUCI">
         <MappingFragment StoreEntitySet="T_GDA_INGRESOUCI">

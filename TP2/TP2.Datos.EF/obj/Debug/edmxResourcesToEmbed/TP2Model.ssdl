@@ -186,14 +186,6 @@
     <Property Name="idInsumo" Type="int" Nullable="false" />
     <Property Name="cantidad" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="T_GUQ_PACIENTE_ESTADO_UCI">
-    <Key>
-      <PropertyRef Name="idPacienteEstado" />
-    </Key>
-    <Property Name="idPacienteEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idPaciente" Type="int" />
-    <Property Name="estado" Type="varchar" MaxLength="20" />
-  </EntityType>
   <EntityType Name="T_GUQ_PARTIDA">
     <Key>
       <PropertyRef Name="idPartida" />
@@ -307,18 +299,6 @@
       </Principal>
       <Dependent Role="T_GUQ_ESTADÍSTICA_RECURSOS">
         <PropertyRef Name="idPartida" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_paciente">
-    <End Role="T_GDA_PACIENTE" Type="Self.T_GDA_PACIENTE" Multiplicity="0..1" />
-    <End Role="T_GUQ_PACIENTE_ESTADO_UCI" Type="Self.T_GUQ_PACIENTE_ESTADO_UCI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="T_GDA_PACIENTE">
-        <PropertyRef Name="idPaciente" />
-      </Principal>
-      <Dependent Role="T_GUQ_PACIENTE_ESTADO_UCI">
-        <PropertyRef Name="idPaciente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -630,7 +610,6 @@
     <EntitySet Name="T_GUQ_INMUEBLE_TIPO_OPERACION" EntityType="Self.T_GUQ_INMUEBLE_TIPO_OPERACION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GUQ_INSUMO" EntityType="Self.T_GUQ_INSUMO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GUQ_INSUMO_TIPOOPERACION" EntityType="Self.T_GUQ_INSUMO_TIPOOPERACION" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="T_GUQ_PACIENTE_ESTADO_UCI" EntityType="Self.T_GUQ_PACIENTE_ESTADO_UCI" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GUQ_PARTIDA" EntityType="Self.T_GUQ_PARTIDA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GUQ_PRESUPUESTO" EntityType="Self.T_GUQ_PRESUPUESTO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_GUQ_PRESUPUESTO_PARTIDA" EntityType="Self.T_GUQ_PRESUPUESTO_PARTIDA" Schema="dbo" store:Type="Tables" />
@@ -653,10 +632,6 @@
     <AssociationSet Name="FK_Estadísticas_recursos_idPartidas" Association="Self.FK_Estadísticas_recursos_idPartidas">
       <End Role="T_GUQ_PARTIDA" EntitySet="T_GUQ_PARTIDA" />
       <End Role="T_GUQ_ESTADÍSTICA_RECURSOS" EntitySet="T_GUQ_ESTADÍSTICA_RECURSOS" />
-    </AssociationSet>
-    <AssociationSet Name="fk_paciente" Association="Self.fk_paciente">
-      <End Role="T_GDA_PACIENTE" EntitySet="T_GDA_PACIENTE" />
-      <End Role="T_GUQ_PACIENTE_ESTADO_UCI" EntitySet="T_GUQ_PACIENTE_ESTADO_UCI" />
     </AssociationSet>
     <AssociationSet Name="FK_Reserva_sala_operación_IdEmpleado" Association="Self.FK_Reserva_sala_operación_IdEmpleado">
       <End Role="T_GG_EMPLEADO" EntitySet="T_GG_EMPLEADO" />

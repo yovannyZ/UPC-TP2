@@ -51,8 +51,6 @@
         <EntityTypeShape EntityType="TP2Model.T_GUQ_PRESUPUESTO_PARTIDA" Width="1.5" PointX="7.625" PointY="7" />
         <AssociationConnector Association="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PARTIDA" />
         <AssociationConnector Association="TP2Model.FK_T_GUQ_PRESUPUESTO_PARTIDA_T_GUQ_PRESUPUESTO" />
-        <EntityTypeShape EntityType="TP2Model.T_GUQ_PACIENTE_ESTADO_UCI" Width="1.5" PointX="7.5" PointY="29.625" />
-        <AssociationConnector Association="TP2Model.fk_paciente" />
         <EntityTypeShape EntityType="TP2Model.T_GDA_INGRESOUCI" Width="1.5" PointX="7.5" PointY="32.375" />
         <AssociationConnector Association="TP2Model.FK__T_GDA_ING__idPac__6EF57B66" />
         <EntityTypeShape EntityType="TP2Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="3.75" />

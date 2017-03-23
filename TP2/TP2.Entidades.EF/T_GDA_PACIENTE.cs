@@ -19,7 +19,6 @@ namespace TP2.Entidades.EF
         {
             this.T_GDA_HISTORIA_CLINICA = new HashSet<T_GDA_HISTORIA_CLINICA>();
             this.T_GUQ_RESERVA_SALA_OPERACIÓN = new HashSet<T_GUQ_RESERVA_SALA_OPERACIÓN>();
-            this.T_GUQ_PACIENTE_ESTADO_UCI = new HashSet<T_GUQ_PACIENTE_ESTADO_UCI>();
             this.T_GDA_INGRESOUCI = new HashSet<T_GDA_INGRESOUCI>();
         }
     
@@ -38,8 +37,6 @@ namespace TP2.Entidades.EF
         public virtual ICollection<T_GDA_HISTORIA_CLINICA> T_GDA_HISTORIA_CLINICA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_GUQ_RESERVA_SALA_OPERACIÓN> T_GUQ_RESERVA_SALA_OPERACIÓN { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_GUQ_PACIENTE_ESTADO_UCI> T_GUQ_PACIENTE_ESTADO_UCI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_GDA_INGRESOUCI> T_GDA_INGRESOUCI { get; set; }
     }
